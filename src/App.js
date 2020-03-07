@@ -9,10 +9,16 @@ import ExampleEvent from './handling-event/example-event'
 import State from './state/index'
 import ExampleCar from './example-car/index'
 import ListKey from './list-key/index'
-
+import Props from './props/index'
+import BaiTapProps from './props_baitap/index'
+import ShoppingCart from './shopping-cart/index'
 function App() {
   return (
     <div >
+      <ShoppingCart />
+      <hr />
+      <BaiTapProps />
+      <hr />
       {/* Add component vào App.js để chạy */}
       {/* <Baitap1 /> */}
       {/* <Baitap2 /> */}
@@ -27,6 +33,10 @@ function App() {
       <ExampleCar />
       <hr />
       <ListKey />
+      <hr />
+      <Props />
+      <hr />
+      
       Main App.js
     </div>
   );
