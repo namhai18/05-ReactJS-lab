@@ -12,9 +12,13 @@ import ListKey from './list-key/index'
 import Props from './props/index'
 import BaiTapProps from './props_baitap/index'
 import ShoppingCart from './shopping-cart/index'
+import Home from './user-managerment/Home'
+
 function App() {
   return (
     <div >
+      <Home />
+      <hr />
       <ShoppingCart />
       <hr />
       <BaiTapProps />

@@ -2,15 +2,28 @@ import React, { Component } from "react";
 
 export default class Modal extends Component {
 
-  renderTable= () =>{
-    return this.props.gioHang.map((sanPham)=> {
+  renderTable = () => {
+    return this.props.gioHang.map((sanPham) => {
       return (<tr key={sanPham.maSP}>
         <td>{sanPham.maSP}</td>
         <td>{sanPham.tenSP}</td>
         <td>{}</td>
-        <td>{sanPham.soLuong}</td>
+        <td>
+          <button onClick={()=> {
+            this.props.tangGiamSL(sanPham,false)
+          }}>-</button>
+          {sanPham.soLuong}
+          <button onClick={()=> {
+            this.props.tangGiamSL(sanPham,true)
+          }}>+</button>
+        </td>
         <td>{sanPham.giaBan}</td>
-        <td>{sanPham.giaBan*sanPham.soLuong}</td>
+        <td>{sanPham.giaBan * sanPham.soLuong}</td>
+        <td>
+          <button className="btn btn-danger" onClick={() => {
+            this.props.delete(sanPham);
+          }}>Delete</button>
+        </td>
       </tr>)
     })
   }
@@ -56,7 +69,7 @@ export default class Modal extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                {this.renderTable()};
+                  {this.renderTable()};
                   {/* <tr>
                     <td>1</td>
                     <td>VinSmart Live</td>

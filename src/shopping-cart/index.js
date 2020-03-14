@@ -44,7 +44,7 @@ export default class ShoppingCart extends Component {
     }
   ];
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       mangSanPham: this.mangSanPham,
@@ -53,11 +53,17 @@ export default class ShoppingCart extends Component {
     };
   }
 
-  handleDetail = (product) =>{
+  handleDetail = (product) => {
     this.setState({
       detailProduct: product
     });
   }
+
+  timViTri = (id) => {
+    return (this.state.mangGioHang.findIndex(sanPham => {
+      return sanPham.maSP === id;
+    }));
+  };
 
   handleGioHang = (product) => {
     const addProduct = {
@@ -67,15 +73,83 @@ export default class ShoppingCart extends Component {
       soLuong: 1,
       giaBan: product.giaBan
     }
-    let mangGioHang = [...this.state.mangGioHang, addProduct];
+
+    // search trong mangGioHang xem da ton tai chua
+    let index = this.timViTri(product.maSP);
+    console.log(index);
+
+    // copy ra mangGioHang rieng
+    let mangGioHang = [...this.state.mangGioHang];
+
+    // Neu khong tim thay index return -1
+    if (index !== -1) {
+      // Update soLuong trong mangGioHang
+      mangGioHang[index].soLuong +=1;
+    } else {
+      // Add them 1 object vao mangGioHang
+      mangGioHang = [...this.state.mangGioHang, addProduct];
+    }
+    // setState de render lai mangGioHang (do mang moi trung ten nen viet ngan gon)
     this.setState({
+      // mangGioHang:mangGioHang  => mangGioHang
       mangGioHang
     },
-    // do bat dong bo nen muon show lap tuc thi can bo vao tham so 2 cua setState
-    ()=>{
-      console.log(this.state.mangGioHang);
-    });
-    
+      // do bat dong bo nen muon show lap tuc thi can bo vao tham so 2 cua setState
+      () => {
+        console.log(this.state.mangGioHang);
+      });
+  }
+
+
+  handleDelete = (product)=>{
+    console.log(product);
+    // dung slice de xoa
+    let index = this.timViTri(product.maSP);
+    console.log(index);
+    let mangGioHang = [...this.state.mangGioHang];
+    if (index !== -1){
+      mangGioHang.splice(index,1);
+      this.setState({
+        // mangGioHang:mangGioHang  => mangGioHang
+        mangGioHang
+      })
+    }else{
+      
+    }
+  }
+
+  handleTangGiamSL = (product,flag) =>{
+    let index = this.timViTri(product.maSP);
+    let mangGioHang = [...this.state.mangGioHang];
+    // Tang so luong
+    if (flag){
+      // mangGioHang = [...this.state.mangGioHang, product];
+      mangGioHang[index].soLuong +=1;
+      console.log("handleTangGiamSL: Tang");
+    }else {
+      if( mangGioHang[index].soLuong > 1){
+        mangGioHang[index].soLuong -=1;
+      }else{
+        mangGioHang.splice(index,1);
+      }
+      console.log("handleTangGiamSL: Giam");
+    }
+    this.setState({
+      // mangGioHang:mangGioHang  => mangGioHang
+      mangGioHang: mangGioHang
+    })
+  }
+
+  // Luôn luôn phải co return (); tổng trong arrow function
+  tongSL = () => {
+    return (this.state.mangGioHang.reduce((total,sanPham)=>{
+      return total = total + sanPham.soLuong;
+    },0));
+    // let mangGioHang = [...this.state.mangGioHang];
+    // let resultTongTien = mangGioHang.reduce((total,sanPham,index)=>{
+    //   total = total + sanPham.soLuong;
+    //   return total;
+    // },0);
   }
 
   render() {
@@ -91,14 +165,16 @@ export default class ShoppingCart extends Component {
             data-toggle="modal"
             data-target="#modelId"
           >
-            Giỏ hàng (0)
+            Giỏ hàng ({this.tongSL()})
           </button>
         </div>
-        <DanhSachSanPham danhsachSanPham={this.state.mangSanPham} detailProductIndex={this.handleDetail} 
-        gioHangIndex={this.handleGioHang} 
-        
+        <DanhSachSanPham danhsachSanPham={this.state.mangSanPham} detailProductIndex={this.handleDetail}
+          gioHangIndex={this.handleGioHang}
+
         />
-        <Modal gioHang = {this.state.mangGioHang}/>
+        <Modal gioHang={this.state.mangGioHang} 
+        delete = {this.handleDelete}
+        tangGiamSL = {this.handleTangGiamSL} />
         <div className="row">
           <div className="col-sm-5">
             <img className="img-fluid" src="./img/vsphone.jpg" alt="" />
