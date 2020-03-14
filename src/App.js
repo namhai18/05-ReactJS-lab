@@ -13,10 +13,13 @@ import Props from './props/index'
 import BaiTapProps from './props_baitap/index'
 import ShoppingCart from './shopping-cart/index'
 import Home from './user-managerment/Home'
+import HomeRedux from './user-managerment-redux/Home'
 
 function App() {
   return (
     <div >
+      <HomeRedux />
+      <hr />
       <Home />
       <hr />
       <ShoppingCart />

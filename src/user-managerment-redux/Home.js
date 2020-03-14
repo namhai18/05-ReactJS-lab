@@ -109,13 +109,13 @@ class Home extends Component {
     // })
     return (
       <div className="container">
-        <h1 className="display-4 text-center my-3">User Management</h1>
+        <h1 className="display-4 text-center my-3">User Management Redux</h1>
         <div className="d-flex justify-content-between align-items-center">
           <Search keywork={this.handleKeyword} />
           <button
             className="btn btn-success"
             data-toggle="modal"
-            data-target="#modelIdUser"
+            data-target="#modelIdUserRedux"
             // cap nhat lai state cho userEdit
             onClick={() => {
               this.setState({

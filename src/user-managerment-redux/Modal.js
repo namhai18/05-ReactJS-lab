@@ -67,7 +67,7 @@ class Modal extends Component {
     return (
       <div
         className="modal fade"
-        id="modelIdUser"
+        id="modelIdUserRedux"
         tabIndex={-1}
         role="dialog"
         aria-labelledby="modelTitleId"
