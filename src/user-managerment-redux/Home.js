@@ -126,7 +126,7 @@ class Home extends Component {
             Add User
           </button>
         </div>
-        <Users userList={userList}
+        <Users 
           userHome={this.handleDeleteUser}
           getUserEdit={this.handleGetUserEdit} />
         <Modal submit={this.handleSubmitUser}
