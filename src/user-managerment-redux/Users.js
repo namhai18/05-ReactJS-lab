@@ -1,19 +1,25 @@
 import React, { Component } from "react";
 import UserItem from "./UserItem";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
 class Users extends Component {
-  
-  renderHTML = () => {
-    return this.props.userList.map((user)=>{
-      return <UserItem 
-      key={user.id} 
-      user={user} 
-      userList = {this.props.userHome}
-      getUserEdit = {this.props.getUserEdit}/>
+
+  renderTable = () => {
+    let { userList, keyWork } = this.props;
+    userList = userList.filter(user => {
+      return user.name.toLowerCase().indexOf(keyWork.toLowerCase()) !== -1
+    });
+
+    return userList.map((user) => {
+      return <UserItem
+        key={user.id}
+        user={user}
+        userList={this.props.userHome}
+      // getUserEdit = {this.props.getUserEdit}
+      />
     });
   }
-  
+
   render() {
     return (
       <div>
@@ -31,7 +37,7 @@ class Users extends Component {
             {/* <UserItem />
             <UserItem />
             <UserItem /> */}
-            {this.renderHTML()}
+            {this.renderTable()}
           </tbody>
         </table>
       </div>
@@ -43,8 +49,9 @@ class Users extends Component {
 const mapStateToProps = (state) => {
   return {
     // key: value
-    userList: state.userReducer.userList
+    userList: state.userReducer.userList,
+    keyWork: state.userReducer.keyWork
   };
 };
 
-export default connect(mapStateToProps,null) (Users);
+export default connect(mapStateToProps, null)(Users);

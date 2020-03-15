@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Search from "./Search";
 import Users from "./Users";
 import Modal from "./Modal";
+import {connect} from "react-redux";
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -99,11 +101,13 @@ class Home extends Component {
 
   render() {
     // Init gia tri ban đầu từ mảng trong state
-    let { userList,keyWork } = this.state;
-    // Filter từ mảng userList đã dc bóc tách ra , không làm truc tiếp lên state
-    userList = userList.filter(user => {
-      return user.name.toLowerCase().indexOf(keyWork.toLowerCase()) !== -1
-    });
+    // let { userList,keyWork } = this.state;
+    // // Filter từ mảng userList đã dc bóc tách ra , không làm truc tiếp lên state
+    // userList = userList.filter(user => {
+    //   return user.name.toLowerCase().indexOf(keyWork.toLowerCase()) !== -1
+    // });
+    // => REDUX
+    
     // this.setState({
     //   userList: searchListUser
     // })
@@ -111,16 +115,19 @@ class Home extends Component {
       <div className="container">
         <h1 className="display-4 text-center my-3">User Management Redux</h1>
         <div className="d-flex justify-content-between align-items-center">
-          <Search keywork={this.handleKeyword} />
+          <Search 
+          // keywork={this.handleKeyword} 
+          />
           <button
             className="btn btn-success"
             data-toggle="modal"
             data-target="#modelIdUserRedux"
             // cap nhat lai state cho userEdit
             onClick={() => {
-              this.setState({
-                userEdit: null
-              })
+              // this.setState({
+              //   userEdit: null
+              // })
+              this.props.changeTitle();
             }}
           >
             Add User
@@ -128,13 +135,28 @@ class Home extends Component {
         </div>
         <Users 
           userHome={this.handleDeleteUser}
-          getUserEdit={this.handleGetUserEdit} />
-        <Modal submit={this.handleSubmitUser}
-          userEdit={this.state.userEdit}
+          // getUserEdit={this.handleGetUserEdit}
+           />
+        <Modal 
+          // Dùng redux
+          // submit={this.handleSubmitUser}
+          // userEdit={this.state.userEdit}
         />
       </div>
     );
   }
 }
 
-export default Home;
+const mapDisaptchToProps = dispatch => {
+  return {
+    changeTitle: () => {
+      let action = {
+        type: "EDIT",
+        user: null
+      };
+      dispatch(action);
+    }
+  }
+}
+
+export default connect(null,mapDisaptchToProps) (Home);

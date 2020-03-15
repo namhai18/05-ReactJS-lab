@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import {connect} from "react-redux";
+// import tất cả hàm trong action
+import * as action from "./../redux/action";
 
 class UserItem extends Component {
   render() {
@@ -15,7 +17,11 @@ class UserItem extends Component {
         <td>{user.type}</td>
         <td>
           <button
-            onClick={() => { this.props.getUserEdit(user) }}
+            onClick={() => { 
+              // chuyen sang dung redux
+              this.props.edit(user);
+              // this.props.getUserEdit(user)
+             }}
             className="btn btn-info mr-2"
             data-toggle="modal"
             data-target="#modelIdUser"
@@ -23,7 +29,7 @@ class UserItem extends Component {
             Edit
           </button>
           <button className="btn btn-danger" onClick={() => {
-
+            this.props.delete(user);
             // this.props.userList(user)
           }
           }>Delete</button>
@@ -37,11 +43,18 @@ const mapDisaptchToProps =(dispatch) => {
   return {
     // key : value (arrow function)
     delete: (user) => {
+      // let action = {
+      //   type: "DELETE",
+      //   user: user
+      // };
+      // bắn acton vào store
+      dispatch(action.actDelete(user));
+    },
+    edit: (user) =>{
       let action = {
-        type: "DELETE",
+        type: "EDIT",
         user: user
       };
-      // bắn acton vào store
       dispatch(action);
     }
   }
@@ -49,4 +62,4 @@ const mapDisaptchToProps =(dispatch) => {
 
 
 // connect mapDisaptchToProps vào component
-export default UserItem;
+export default connect(null,mapDisaptchToProps) (UserItem);
