@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 class Users extends Component {
 
   renderTable = () => {
+    console.log("User: ");
+    console.log(this.props);
     let { userList, keyWork } = this.props;
     userList = userList.filter(user => {
       return user.name.toLowerCase().indexOf(keyWork.toLowerCase()) !== -1

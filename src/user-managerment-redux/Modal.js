@@ -1,7 +1,21 @@
 import React, { Component } from "react";
 import {connect} from "react-redux";
+import * as action from "./../redux/action";
 
 class Modal extends Component {
+
+  // có form thì tao state để quản lý
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: "",
+      username: "",
+      name: "",
+      email: "",
+      phoneNumber: "",
+      type: "USER"
+    };
+  }
 
   // Khi nhập props tiếp theo khác props ban đầu thì chạy
   componentWillReceiveProps(nextProps) {
@@ -44,18 +58,7 @@ class Modal extends Component {
       });
   }
 
-  // có form thì tao state để quản lý
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: "",
-      username: "",
-      name: "",
-      email: "",
-      phoneNumber: "",
-      type: "USER"
-    };
-  }
+  
 
   handleSubmit = (event) => {
     // Hàm ngăn load lại trang
@@ -131,22 +134,23 @@ class Modal extends Component {
   }
 }
 
+// Lên store kéo data userEdit về
 const mapStateToProps = state =>{
     return {
       userEdit: state.userReducer.userEdit
     };
 }
-
-const mapDisaptchToProps = dispatch => {
+// Đẩy data lên store tùy theo action
+const mapDispatchToProps = dispatch => {
   return {
     onSubmit: (user) =>{
-      let action = {
-        type: "SUBMIT",
-        user: user
-      };
-      dispatch(action);
+      // let action = {
+      //   type: "SUBMIT",
+      //   user: user
+      // };
+      dispatch(action.actSubmit(user));
     }
   }
 }
 
-export default connect(mapStateToProps,mapDisaptchToProps) (Modal);
+export default connect(mapStateToProps,mapDispatchToProps) (Modal);

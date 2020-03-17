@@ -1,3 +1,5 @@
+import * as ActionType from "./../constant/ActionType";
+
 let initialState = {
     userList: [
         {
@@ -25,7 +27,7 @@ let initialState = {
 const userReducer = (state = initialState, action) => {
     // type - check type của action truyền lên Reducer 
     switch (action.type) {
-        case "DELETE":
+        case ActionType.DELETE:
             let index = state.userList.findIndex(item => {
                 return item.id === action.user.id;
             })
@@ -36,7 +38,7 @@ const userReducer = (state = initialState, action) => {
             }
             console.log(action);
             return { ...state };
-        case "SUBMIT":
+        case ActionType.SUBMIT:
             if (action.user.id) {
                 let index = state.userList.findIndex(item => {
                     return item.id === action.user.id;
@@ -53,7 +55,7 @@ const userReducer = (state = initialState, action) => {
                 console.log(action);
             }
             return { ...state };
-        case "EDIT":
+        case ActionType.EDIT:
             // let index = this.timViTri(user.id);
             // console.log("Vi tri : " + index);
             // let userList = [...state.userList];
@@ -61,9 +63,10 @@ const userReducer = (state = initialState, action) => {
             state.userEdit = action.user;
             console.log(action);
             return { ...state };
-        case "SEARCH":
-            state.keyWork = action.keyWork;
+        case ActionType.SEARCH:
             console.log(action);
+            state.keyWork = action.keyWord;
+            // console.log(action);
             return { ...state };
         // Return về state mới
         default:

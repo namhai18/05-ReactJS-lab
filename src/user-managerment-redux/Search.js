@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {connect} from "react-redux";
+import * as action from "./../redux/action";
 
 class Search extends Component {
   render() {
@@ -13,11 +14,11 @@ class Search extends Component {
 const mapDispatchToProps = distpatch => {
   return {
     getKeywork: (keyworkValue) => {
-      let action = {
-        type: "SEARCH",
-        keywork: keyworkValue
-      };
-      distpatch(action);
+      // let action = {
+      //   type: "SEARCH",
+      //   keyWorkabc: keyworkValue
+      // };
+      distpatch(action.actSearch(keyworkValue));
     }
   }
 }

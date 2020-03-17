@@ -24,7 +24,7 @@ class UserItem extends Component {
              }}
             className="btn btn-info mr-2"
             data-toggle="modal"
-            data-target="#modelIdUser"
+            data-target="#modelIdUserRedux"
           >
             Edit
           </button>
@@ -51,11 +51,11 @@ const mapDisaptchToProps =(dispatch) => {
       dispatch(action.actDelete(user));
     },
     edit: (user) =>{
-      let action = {
-        type: "EDIT",
-        user: user
-      };
-      dispatch(action);
+      // let action = {
+      //   type: "EDIT",
+      //   user: user
+      // };
+      dispatch(action.actEdit(user));
     }
   }
 }
