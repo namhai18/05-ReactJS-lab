@@ -16,7 +16,7 @@ class Users extends Component {
       return <UserItem
         key={user.id}
         user={user}
-        userList={this.props.userHome}
+        // userList={this.props.userHome}
       // getUserEdit = {this.props.getUserEdit}
       />
     });
@@ -52,7 +52,7 @@ const mapStateToProps = (state) => {
   return {
     // key: value
     userList: state.userReducer.userList,
-    keyWork: state.userReducer.keyWork
+    keyWork: state.userReducer.keyWork,
   };
 };
 
