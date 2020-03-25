@@ -8,6 +8,10 @@ import {createStore} from "redux";
 // Liên ket react va redux
 import {Provider} from "react-redux";
 import rootReducer from "./redux/reducers/index"
+import "bootstrap/dist/css/bootstrap.min.css";
+import "jquery/dist/jquery.min.js";
+import "popper.js/dist/umd/popper.min.js";
+import "bootstrap/dist/js/bootstrap.min.js";
 
 // Ket noi store chứa và reducer
 const store = createStore(

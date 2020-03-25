@@ -14,16 +14,23 @@ import BaiTapProps from './props_baitap/index'
 import ShoppingCart from './shopping-cart/index'
 import Home from './user-managerment/Home'
 import HomeRedux from './user-managerment-redux/Home'
+import LifeCycle from './lifecycle/index'
+import FormValidation from './form-validation/index'
 
 function App() {
   return (
     <div >
+      <FormValidation />
+      <hr />
+      <LifeCycle />
+      <hr />
       <HomeRedux />
       <hr />
       <Home />
       <hr />
       <ShoppingCart />
       <hr />
+      <p>Bai tap props</p>
       <BaiTapProps />
       <hr />
       {/* Add component vào App.js để chạy */}
