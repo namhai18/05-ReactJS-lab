@@ -7,7 +7,8 @@ export default class Props extends Component {
   constructor(props){
     super(props);
     this.state = {
-      name: "Cybersoft"
+      name: "Cybersoftccc",
+      flagCheckBox : true,
     };
   }
 
@@ -16,6 +17,18 @@ export default class Props extends Component {
     console.log("handleResetName" + name);
     this.setState({
       name:name,
+    });
+  }
+
+  updateName = () => {
+    this.setState({
+      name:"update props",
+    });
+  }
+
+  updateCheckbox = () => {
+    this.setState({
+      flagCheckBox:!this.state.flagCheckBox,
     });
   }
 
@@ -33,8 +46,10 @@ export default class Props extends Component {
             <div className="row">
               <div className="col-sm-6">
               {/* --1-- truyen sang con */}
+              <button className="btn btn-success" onClick={this.updateCheckbox}>Checkbox update</button>
+              <button className="btn btn-success" onClick={this.updateName}>Update props send to child</button>
               {/* // --2-- click button doi name của component cha*/}
-              <ClassProps name={this.state.name} resetName={this.handleResetName}/>
+              <ClassProps name={this.state.name} flagCheckBox={this.state.flagCheckBox} resetName={this.handleResetName}/>
               </div>
               <div className="col-sm-6">
                  {/* // --3-- click button doi name của component cha func*/}

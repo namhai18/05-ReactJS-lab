@@ -63,6 +63,7 @@ class Modal extends Component {
   handleSubmit = (event) => {
     // Hàm ngăn load lại trang
     event.preventDefault();
+    debugger;
     console.log(this.state);
     this.props.onSubmit(this.state);
     // this.props.submit(this.state);

@@ -10,6 +10,7 @@ export default class ExampleCar extends Component {
     }
 
     showMeParam = (color) => {
+        debugger;
         console.log(color);
         if (color === "Black"){
             this.setState({

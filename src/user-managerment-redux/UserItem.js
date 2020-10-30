@@ -26,7 +26,7 @@ class UserItem extends Component {
             data-toggle="modal"
             data-target="#modelIdUserRedux"
           >
-            Edit
+            Editx
           </button>
           <button className="btn btn-danger" onClick={() => {
             this.props.delete(user);

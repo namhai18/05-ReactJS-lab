@@ -19,6 +19,7 @@ export default class lifeCycle extends Component {
 
     componentDidMount() {
         console.log("componentDidMount");
+        console.log(this.state.username)
     }
 
     // Khi có set state lại thì componentWillUpdate chạy > render chạy > componentDidUpdate

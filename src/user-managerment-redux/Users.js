@@ -11,7 +11,7 @@ class Users extends Component {
     userList = userList.filter(user => {
       return user.name.toLowerCase().indexOf(keyWork.toLowerCase()) !== -1
     });
-
+debugger;
     return userList.map((user) => {
       return <UserItem
         key={user.id}

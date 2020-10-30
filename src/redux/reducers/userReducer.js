@@ -39,6 +39,7 @@ const userReducer = (state = initialState, action) => {
             console.log(action);
             return { ...state };
         case ActionType.SUBMIT:
+            debugger;
             if (action.user.id) {
                 let index = state.userList.findIndex(item => {
                     return item.id === action.user.id;
@@ -60,6 +61,7 @@ const userReducer = (state = initialState, action) => {
             // console.log("Vi tri : " + index);
             // let userList = [...state.userList];
             // userList.splice(index, 1);
+            debugger;
             state.userEdit = action.user;
             console.log(action);
             return { ...state };
